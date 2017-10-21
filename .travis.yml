@@ -7,6 +7,6 @@ matrix:
     - os: osx
 
 script:
-  - pip install cibuildwheel==0.6.0
+  - pip install cibuildwheel==0.6.0 Cython
   - git clone https://github.com/dask/dask-ml
   - cibuildwheel --output-dir wheelhouse dask-ml
