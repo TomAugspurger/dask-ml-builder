@@ -1,6 +1,7 @@
 matrix:
   include:
     - sudo: required
+      language: python
       services:
         - docker
     - os: osx
