@@ -1,0 +1,11 @@
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+    - os: osx
+
+script:
+  - pip install cibuildwheel==0.6.0
+  - git clone https://github.com/dask/dask-ml
+  - cibuildwheel --output-dir wheelhouse dask-ml
