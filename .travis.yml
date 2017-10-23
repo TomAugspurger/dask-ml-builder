@@ -11,9 +11,8 @@ env:
         - TEST_DEPENDS="dask distributed numpy pandas scikit-learn scipy dask-glm dask-searchcv pytest pytest-mock"
         - PLAT=x86_64
         - UNICODE_WIDTH=32
-        # - TWINE_USERNAME=tomaugspurger
-        # - secure:
-        #     "WIi0X0BALXjB74zg8hmlbzvk6x8wXaOK9zAyoMMYnD2LmXHufVqs3tXelFbvlk0i0+qwZ0nR5XP1IwHWRXZ7WdAsY+bIWIp2mo2UjafhS0POjzCfYZjDPd1GS5WaeK4YwSWYy7peofdUOIHY9A9CvXH04GQ/MDxgCX/cdwmgJQuaQOGhTPOzjegQMPizt4KXuMMK/K0hWVa8YZYryOR+VFd/8NoHbUeV8pMjy0a+xVjnYtuBxchf8MiWTnC5RdDvavWv1hyAk3MQR0kdv5wKODzfsuqqRPBNlR5rTEkpJaluXZEGU26TsBWULrD+HfHA0S5ef44ErJKeeDGpxU39WlJbZY610Et3ehH0oQSgS6T8Lup561IdPt40ikyQ3s0DuxFor3RQkJ2XVYa3xyeDyRnYAIgOr4r4Ve7IxZLGWJX3nfX12v+TiYIwrCHcVKoPaxx6dRrfBxJ2pzg4G3xSofETpydNuGRfezpzgT4+yU4AWBLacGamnyif4ZHvkKopaAMzedQSRqtHcNkMJikxVflQ22oGVdLN6Rum7ONab89qUEz8Aq6262soIfIotUDabkXMDPwHKeTMMOcuw00WyLsD1iTt4+qkdiBJbAtghOpCg3Caqf01XPYxttbo5Dx1WSju6dsub2HFuBhsQdcDpBBOsBkiBNMsb1/O7DmX3S0="
+        - ANACONDA_USERNAME=taugspurger
+        - secure: "Hv8HNUHtS4T3m3r07QlUVcb/0/fHMvD/zk527jkJyPaU2Ik4idNtg/bnusKNwaBM1a3d80WaChry2yP5h3iceaDvVhvLgX758Cm4xhh9wgli8oVUlOvPtA+CAKaFteCZ1wnjtprTv8pLNDDC1C9U2otybeGOC4it1RrwW0tm9rM9sFt+zVXL1sbO1YwJxhHagUUcb1RYdKJa8zUEi5pmwF/INWRNIQK47H6MDoCRRj42DvWy1Pd6OIwxU6NzDKgoGkzeqBXaA/yutWyEx+fNlza5zb5O7ezaMIdNJuxbZ1WCGZuuoIQa5u4QJKggXopQC9Nd54V7mAREqi3y2uh7CMq0Y/kEfKDQ+rG/qm36TFnW82qCBYDHhupboqfKVaJVXJTB3WcFP2vl8qTxNg81UxR6+w0BoLNMwklqxykh212R2XJ457197Kd8jcPQ2l1SHcU6dVNygDf7y3SG+t+QTx0gDXy4ZYF8i8r99X3JMNYiHl2ky1YqspN3Yk4lciCLaUH8iXZpltcuqQWvyBA0yR7vJT5VcIk9z3mO3EBTdRQ+R9beNgkn8d5lybAupCN1HA3ldgY4Fs8s/M9ZUBJ9gLJSyqQI2+6D0uEKJA1DNsrLRXYrByzLytnw5YCAaOcEduXXi5uTh9452KsBqG7yqHgPKG2h6iLxhX4Qhww54Ug="
 
 language: python
 # The travis Python version is unrelated to the version we build and test
@@ -85,8 +84,14 @@ script:
 
 after_success:
     # Upload wheels to Rackspace container
-    - pip install twine
-    # This uploads the wheels to a Rackspace container owned by the
-    # scikit-learn team, available at http://wheels.scipy.org.  See above
-    # for information on using this account or choosing another.
-    - twine upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
+    - |
+      if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+          time wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
+      else
+          time wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+      fi
+    - time bash miniconda.sh -b -p "$MINICONDA_DIR"
+    - export PATH="$HOME/miniconda3/bin:$PATH"
+    - conda install anaconda-client -q -y
+    - anaconda login --username ${ANACONDA_USERNAME} --password ${ANACONDA_PASSWORD}
+    - anaconda upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
