@@ -93,5 +93,5 @@ after_success:
     - bash miniconda.sh -b -p "$HOME/miniconda3"
     - export PATH="$HOME/miniconda3/bin:$PATH"
     - conda install anaconda-client -q -y
-    - anaconda login --username ${ANACONDA_USERNAME} --password ${ANACONDA_PASSWORD}
+    - anaconda login --username "$ANACONDA_USERNAME" --password "$ANACONDA_PASSWORD"
     - anaconda upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
