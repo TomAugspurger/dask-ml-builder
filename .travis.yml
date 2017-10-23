@@ -2,7 +2,7 @@ env:
     global:
         - REPO_DIR=dask-ml
         # Commit from your-project that you want to build
-        - BUILD_COMMIT=HEAD
+        - BUILD_COMMIT=test-dist
         # pip dependencies to _build_ your project
         - BUILD_DEPENDS="Cython numpy setuptools_scm"
         # pip dependencies to _test_ your project.  Include any dependencies
@@ -35,45 +35,45 @@ matrix:
   include:
     - os: linux
       env: MB_PYTHON_VERSION=2.7
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.5
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.5
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.6
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.6
-        - PLAT=i686
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=2.7
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.5
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.6
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=2.7
+    #     - UNICODE_WIDTH=16
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=2.7
+    #     - PLAT=i686
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=2.7
+    #     - PLAT=i686
+    #     - UNICODE_WIDTH=16
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=3.5
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=3.5
+    #     - PLAT=i686
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=3.6
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=3.6
+    #     - PLAT=i686
+    # - os: osx
+    #   language: generic
+    #   env:
+    #     - MB_PYTHON_VERSION=2.7
+    # - os: osx
+    #   language: generic
+    #   env:
+    #     - MB_PYTHON_VERSION=3.5
+    # - os: osx
+    #   language: generic
+    #   env:
+    #     - MB_PYTHON_VERSION=3.6
 
 before_install:
     - source multibuild/common_utils.sh
