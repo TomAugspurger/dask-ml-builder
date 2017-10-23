@@ -11,14 +11,9 @@ env:
         - TEST_DEPENDS="dask distributed numpy pandas scikit-learn scipy dask-glm dask-searchcv pytest pytest-mock"
         - PLAT=x86_64
         - UNICODE_WIDTH=32
-        - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
-        # Following generated with
-        # travis encrypt -r your-org/your-project-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
-        # This is for Rackspace uploads.  Contact Matthew Brett, or the
-        # scikit-learn team, for # permission (and the API key) to upload to
-        # the Rackspace account used here, or use your own account.
-        - secure:
-            "MNKyBWOzu7JAUmC0Y+JhPKfytXxY/ADRmUIMEWZV977FLZPgYctqd+lqel2QIFgdHDO1CIdTSymOOFZckM9ICUXg9Ta+8oBjSvAVWO1ahDcToRM2DLq66fKg+NKimd2OfK7x597h/QmUSl4k8XyvyyXgl5jOiLg/EJxNE2r83IA="
+        # - TWINE_USERNAME=tomaugspurger
+        # - secure:
+        #     "WIi0X0BALXjB74zg8hmlbzvk6x8wXaOK9zAyoMMYnD2LmXHufVqs3tXelFbvlk0i0+qwZ0nR5XP1IwHWRXZ7WdAsY+bIWIp2mo2UjafhS0POjzCfYZjDPd1GS5WaeK4YwSWYy7peofdUOIHY9A9CvXH04GQ/MDxgCX/cdwmgJQuaQOGhTPOzjegQMPizt4KXuMMK/K0hWVa8YZYryOR+VFd/8NoHbUeV8pMjy0a+xVjnYtuBxchf8MiWTnC5RdDvavWv1hyAk3MQR0kdv5wKODzfsuqqRPBNlR5rTEkpJaluXZEGU26TsBWULrD+HfHA0S5ef44ErJKeeDGpxU39WlJbZY610Et3ehH0oQSgS6T8Lup561IdPt40ikyQ3s0DuxFor3RQkJ2XVYa3xyeDyRnYAIgOr4r4Ve7IxZLGWJX3nfX12v+TiYIwrCHcVKoPaxx6dRrfBxJ2pzg4G3xSofETpydNuGRfezpzgT4+yU4AWBLacGamnyif4ZHvkKopaAMzedQSRqtHcNkMJikxVflQ22oGVdLN6Rum7ONab89qUEz8Aq6262soIfIotUDabkXMDPwHKeTMMOcuw00WyLsD1iTt4+qkdiBJbAtghOpCg3Caqf01XPYxttbo5Dx1WSju6dsub2HFuBhsQdcDpBBOsBkiBNMsb1/O7DmX3S0="
 
 language: python
 # The travis Python version is unrelated to the version we build and test
@@ -90,11 +85,8 @@ script:
 
 after_success:
     # Upload wheels to Rackspace container
-    - pip install wheelhouse-uploader
+    - pip install twine
     # This uploads the wheels to a Rackspace container owned by the
     # scikit-learn team, available at http://wheels.scipy.org.  See above
     # for information on using this account or choosing another.
-    - python -m wheelhouse_uploader upload --local-folder
-        ${TRAVIS_BUILD_DIR}/wheelhouse/
-        --no-update-index
-        wheels
+    - twine upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
