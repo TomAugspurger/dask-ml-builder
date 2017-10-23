@@ -5,9 +5,8 @@ environment:
     BUILD_COMMIT: HEAD
     BUILD_DEPENDS: "Cython numpy>=1.9.0 setuptools_scm"
     TEST_DEPENDS: "numpy>=1.9.0 dask distributed pandas scikit-learn scipy dask-glm dask-searchcv pytest"
-    ANACONDA_USERNAME: taugspurger
-    ANACONDA_PASSWORD:
-      secure: FmlIHY8cBNyDfNtEmiErAg==
+    MY_UPLOAD_KEY:
+      secure: LCEGs6KRiNBdsvxkpWVWvyiHr0nTVClFOBwmVVHTguDKbAzIavvxme/bPL/RFY2A
 
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
@@ -90,5 +89,5 @@ artifacts:
 
 on_success:
   - conda install anaconda-client -q -y
-  - anaconda login --username %ANACONDA_USERNAME% --password %ANACONDA_PASSWORD%
   - anaconda upload %REPO_DIR\\dist%
+  - anaconda -t %MY_UPLOAD_KEY% upload -u TomAugspurger %REPO_DIR\\dist%

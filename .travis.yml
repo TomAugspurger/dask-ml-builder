@@ -12,7 +12,7 @@ env:
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - ANACONDA_USERNAME=taugspurger
-        - secure: "POUbS0wCtd2wyAUguEWW432/zyiMmeyujDYxERXcqK547DP8pJzqzIhwSdR8O6wv7rMY0fCUg2NHbinXYdvaYhNdvvFQ/y39J25iHYjk9whezrU9HuAYAi+lMHVYSL5gOKvTYYG+8T7Zt0ik+zI3tLLPCqinCVQU4t0S8nEUCpYnnyXdX72q99bugO957sB9h1X02Tek4L5DcSgS2I4unhsRP5LrKeRIcQw3bn2NC/Fm6FYAAmPLCbndLrcWP3RgNrwXPcQyNnI33YDIbPCUn2utkTQyN6Nct9Oxx1AtcFakltxrPHWqkdRnnGzpnHsmMgJACrTApGTKAn3DH/Kb/VOh34NayZEZTn3rNJU6r2vzay/FONaPZi/ZwxD10zfBKSGO1GBCh9tWR0EKLT8uWJ3BnNyOakofJdMafkuo7lQwbNGLJjs15P6NBUCsB83h3p/Df6kG6G6gIyYgzRtNrvniiK75KLTTYC0orl5lJrDMrJm6EjsJ7PjsJt5I7jTcUus2SGecm0sVs5/9JAuv0F0w68exdIl0RIXekEra9yxrwiaHsof/luIV2gGp0oW9HId9jkn4Y5J1m/F9bBVVnlT66dCjwcGIIYavjp0dVadiIjK6T4LX1aaCAjV1sNpAiZdPeH6duTNqz1k/ZBJuU8OWwHs8yqOERaouH7MYLko="
+        - secure: "sRgnytE0CTsXdI/DkVxjbDnJHbGeIIxrcqqE1Yy51UNIBHmjRNvTOOwz1eEluh6cmMwjXz+X6yeg4lU5m4fLWXHZ/N2yUuMdBmol24O55AGIVuX33pZ9+fiH7spVaNI8N7OS9SUwTbXd+6ygPNnCJ2gyoDxsUgMqMnHRPfjnQTwm6gGIDkTmab7adNhJuDZGaKAdTnvUYs3AAifkMKly3Pa8Xus/aeD+PPcGU/d4TUEr+dSGQ5QGIL9MuUL746H91cZRBdDO855yy1Z99jmJ49IX89tGvkfQQ+AyW3+qmOr4QgQ8o5VFX5MoOGwI3zeBVgGUXE3Eo/QzCw1AiVLjwtr4Uo80VtffYSKVRHAAfDlyL51VhpJrc2X0uvJjUUrRFX2tGnN6qJBhAwfJW6s+CBRW+1bcNkaqrelfr1Fr6bJ/723RK1EEe8oLWQ2UANBr0lgQUgqzaBxB3OOznxbTbdimFVecp6W0/nNU9boqhCLf36GH6eyeLPVXNZz/3YypKOMk26BADauIVKMhziRS9cNQzuP/2DN4x3kOguU0g4BnkDr7syaDNrwIDeGwnlTAwZXnvCGLeb51//0gYFHL7E+s2iBYERtVkoFb7slt7KrVxcRnTgrdXZkb7vdlzqDuCYkVGOD28exV1yZT5thQGrn5pBJgGYmER3U1XNXeq70="
 
 language: python
 # The travis Python version is unrelated to the version we build and test
@@ -93,5 +93,4 @@ after_success:
     - bash miniconda.sh -b -p "$HOME/miniconda3"
     - export PATH="$HOME/miniconda3/bin:$PATH"
     - conda install anaconda-client -q -y
-    - anaconda login --username "$ANACONDA_USERNAME" --password "$ANACONDA_PASSWORD"
-    - anaconda upload ${TRAVIS_BUILD_DIR}/wheelhouse/*
+    - anaconda -t ${MY_UPLOAD_KEY} upload -u TomAugspurger ${TRAVIS_BUILD_DIR}/wheelhouse/*
