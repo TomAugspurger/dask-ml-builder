@@ -1,4 +1,4 @@
 function run_tests {
     python --version
-    python -c "import dask_ml.utils; dask_ml.utils.test()" 
+    python -c "import dask_ml; import dask_ml.utils"
 }

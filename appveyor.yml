@@ -84,7 +84,7 @@ test_script:
     # run test from installed wheel.
     - cd ..
     # The test try to run cython/msvc so CMD_IN_ENV is needed
-    - "%CMD_IN_ENV% python -c \"import dask_ml.utils; dask_ml.utils.test()\""
+    - "%CMD_IN_ENV% python -c \"import dask_ml; import dask_ml.utils\""
 
 artifacts:
     - path: "%REPO_DIR%\\dist\\*"
