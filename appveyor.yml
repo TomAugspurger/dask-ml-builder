@@ -2,7 +2,7 @@ environment:
   global:
     REPO_DIR: dask-ml
     PACKAGE_NAME: dask_ml
-    BUILD_COMMIT: v0.3.0
+    BUILD_COMMIT: v0.3.1
     BUILD_DEPENDS: "Cython numpy>=1.9.0 setuptools_scm"
     TEST_DEPENDS: "numpy>=1.9.0 dask distributed pandas scikit-learn scipy dask-glm dask-searchcv pytest"
     MY_UPLOAD_KEY:
