@@ -81,4 +81,4 @@ artifacts:
 
 on_success:
   - conda install anaconda-client -q -y
-  - anaconda -t %MY_UPLOAD_KEY% upload -u TomAugspurger --force %REPO_DIR%\\dist\\*
+  - anaconda -t %MY_UPLOAD_KEY% upload -u TomAugspurger --package=dask-ml --force %REPO_DIR%\\dist\\*
