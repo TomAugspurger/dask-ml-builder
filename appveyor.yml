@@ -80,6 +80,6 @@ artifacts:
     - path: "%REPO_DIR%\\dist\\*"
 
 on_success:
-  - pip install git+https://github.com/TomAugspurger/anaconda-client
+  - pip install git+https://github.com/TomAugspurger/anaconda-client@wheel-filename
   # Hardcode version and name to work around https://github.com/Anaconda-Platform/anaconda-client/issues/469
   - anaconda -t %MY_UPLOAD_KEY% upload -u TomAugspurger --package=dask-ml --force %REPO_DIR%\\dist\\* -p dask-ml -v 0.6.0
