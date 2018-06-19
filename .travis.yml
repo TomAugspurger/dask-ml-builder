@@ -8,7 +8,7 @@ env:
         # pip dependencies to _test_ your project.  Include any dependencies
         # that you need, that are also specified in BUILD_DEPENDS, this will be
         # a separate install.
-        - TEST_DEPENDS="dask distributed numpy pandas scikit-learn scipy dask-glm dask-searchcv pytest pytest-mock"
+        - TEST_DEPENDS="dask numpy pandas scikit-learn scipy dask-glm dask-searchcv pytest pytest-mock"
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - ANACONDA_USERNAME=taugspurger
