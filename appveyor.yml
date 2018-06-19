@@ -80,5 +80,5 @@ artifacts:
     - path: "%REPO_DIR%\\dist\\*"
 
 on_success:
-  - conda install anaconda-client -q -y
+  - pip install git+https://github.com/TomAugspurger/anaconda-client
   - anaconda -t %MY_UPLOAD_KEY% upload -u TomAugspurger --package=dask-ml --force %REPO_DIR%\\dist\\*

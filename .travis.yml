@@ -92,5 +92,5 @@ after_success:
       fi
     - bash miniconda.sh -b -p "$HOME/miniconda3"
     - export PATH="$HOME/miniconda3/bin:$PATH"
-    - conda install anaconda-client -q -y
+    - pip install git+https://github.com/TomAugspurger/anaconda-client
     - anaconda -t ${MY_UPLOAD_KEY} upload -u TomAugspurger --force --package=dask-ml ${TRAVIS_BUILD_DIR}/wheelhouse/*
