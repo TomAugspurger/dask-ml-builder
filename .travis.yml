@@ -2,7 +2,7 @@ env:
     global:
         - REPO_DIR=dask-ml
         # Commit from your-project that you want to build
-        - BUILD_COMMIT=v0.6.0
+        - BUILD_COMMIT=v0.6.0  # Also change version in the upload
         # pip dependencies to _build_ your project
         - BUILD_DEPENDS="Cython numpy setuptools setuptools_scm six pkgconfig"
         # pip dependencies to _test_ your project.  Include any dependencies
@@ -93,4 +93,4 @@ after_success:
     - bash miniconda.sh -b -p "$HOME/miniconda3"
     - export PATH="$HOME/miniconda3/bin:$PATH"
     - pip install git+https://github.com/TomAugspurger/anaconda-client
-    - anaconda -t ${MY_UPLOAD_KEY} upload -u TomAugspurger --force --package=dask-ml ${TRAVIS_BUILD_DIR}/wheelhouse/*
+    - anaconda -t ${MY_UPLOAD_KEY} upload -u TomAugspurger --force --package=dask-ml ${TRAVIS_BUILD_DIR}/wheelhouse/* -p dask-ml -v 0.6.0
