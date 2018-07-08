@@ -21,7 +21,7 @@ def main(version):
 
     hrefs = soup.find_all("a", href=True)
     wheel_hrefs = [x.attrs['href'] for x in hrefs
-                   if '0.4.1' in x.attrs['href'] and
+                   if version in x.attrs['href'] and
                    x.attrs['href'].endswith(".whl")]
     urls = ['https://anaconda.org' + href for href in wheel_hrefs]
     n = len(urls)

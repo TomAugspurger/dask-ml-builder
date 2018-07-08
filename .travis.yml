@@ -2,13 +2,13 @@ env:
     global:
         - REPO_DIR=dask-ml
         # Commit from your-project that you want to build
-        - BUILD_COMMIT=v0.6.0  # Also change version in the upload
+        - BUILD_COMMIT=v0.7.0  # Also change version in the upload
         # pip dependencies to _build_ your project
         - BUILD_DEPENDS="Cython numpy setuptools setuptools_scm six pkgconfig"
         # pip dependencies to _test_ your project.  Include any dependencies
         # that you need, that are also specified in BUILD_DEPENDS, this will be
         # a separate install.
-        - TEST_DEPENDS="dask numpy pandas scikit-learn scipy dask-glm dask-searchcv pytest pytest-mock"
+        - TEST_DEPENDS="dask numpy pandas scikit-learn scipy dask-glm pytest pytest-mock"
         - PLAT=x86_64
         - UNICODE_WIDTH=32
         - ANACONDA_USERNAME=taugspurger
